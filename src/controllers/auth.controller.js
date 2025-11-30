@@ -21,8 +21,8 @@ const register = async (req, res) => {
   console.log("hash password:", req.body.password);
 
   try {
-    const user = new user(req.body);
-    await user
+    const userSave = new user(req.body);
+    await userSave
       .save()
       .then((response) => {
         return res.status(201).json({
