@@ -1,9 +1,12 @@
+require("express-async-errors");
+
 const express = require("express");
 const app = express();
 require("dotenv").config();
 require("./src/db/dbConnection");
 const port = process.env.PORT || 5001;
 const router = require("./src/routers");
+const errorHandlerMiddleware = require("./src/middlewares/errorHandle");
 
 // Middlewares
 app.use(express.json());
@@ -19,6 +22,8 @@ app.get("/", (req, res) => {
     message: "Welcome",
   });
 });
+
+app.use(errorHandlerMiddleware);
 
 app.listen(port, () => {
   console.log(`Server ${port} working from port...`);
