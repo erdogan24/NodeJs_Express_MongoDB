@@ -1,8 +1,7 @@
 class Response {
-  constructor(data = null, message = null, status) {
+  constructor(data = null, message = null) {
     this.data = data;
     this.message = message;
-    this.status = status;
   }
 
   success(res) {
@@ -60,3 +59,5 @@ class Response {
     });
   }
 }
+
+module.exports = Response;
