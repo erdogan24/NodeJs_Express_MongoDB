@@ -36,4 +36,27 @@ class Response {
       message: this.message ?? "The transaction is failed!!!",
     });
   }
+
+  error401(res) {
+    return res.status(401).json({
+      success: false,
+      data: this.data,
+      message: this.message ?? "Please Log In",
+    });
+  }
+  error404(res) {
+    return res.status(404).json({
+      success: false,
+      data: this.data,
+      message: this.message ?? "The transaction is failed!!!",
+    });
+  }
+
+  error429(res) {
+    return res.status(429).json({
+      success: false,
+      data: this.data,
+      message: this.message ?? "Too many requests were made.",
+    });
+  }
 }
