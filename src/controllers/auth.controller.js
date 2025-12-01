@@ -29,7 +29,7 @@ const register = async (req, res) => {
       return new Response(data, " has been registered").created(res);
     })
     .catch((err) => {
-      console.log(err);
+      throw new APIError("User could not be register", 400);
     });
 };
 
