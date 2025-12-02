@@ -28,14 +28,23 @@ class authValidation {
           "string.max": "Email must be 10 character at most",
           "string.required": "Emailmust be",
         }),
-        password: joi.string().trim().min(6).max(36).required().messages({
-          "string.base": "Password must be text",
-          "string.empty": "Password cannot be empty",
-          "string.min": "password must be 6 character at least",
-          "string.max": "Password must be 36 character at most",
-          "string.required": "Password must be",
-        }),
+        password: joi
+          .string()
+          .trim()
+          .min(6)
+          .max(36)
+          .required()
+          .messages({
+            "string.base": "Password must be text",
+            "string.empty": "Password cannot be empty",
+            "string.min": "password must be 6 character at least",
+            "string.max": "Password must be 36 character at most",
+            "string.required": "Password must be",
+          })
+          .validateAsync(req.body),
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
