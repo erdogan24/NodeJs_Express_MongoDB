@@ -5,7 +5,13 @@ const APIError = require("../utils/errors");
 const Response = require("../utils/response");
 
 const login = async (req, res) => {
-  console.log(req.body);
+  const { email, password } = req.body;
+
+  const user = await user.findOne({ email });
+
+  console.log(user);
+
+  if (!user) throw new APIError("Email or Password is wrong !");
 
   return res.json(req.body);
 };
