@@ -11,11 +11,12 @@ const login = async (req, res) => {
 
   console.log(userInfo);
 
-  if (!userInfo) throw new APIError("Email or Password is wrong !");
+  if (!userInfo) throw new APIError("Email or Password is wrong !", 401);
 
   const comparePassword = await bcrypt.compare(password, userInfo.password);
   console.log(comparePassword);
 
+  if (!comparePassword) throw new APIError("Email or Password is wrong !", 401);
   return res.json(req.body);
 };
 
