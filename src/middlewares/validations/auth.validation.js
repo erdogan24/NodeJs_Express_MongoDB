@@ -55,6 +55,23 @@ class authValidation {
 
   static login = async (req, res, next) => {
     try {
+      await joi.object({
+        email: joi.string().email().trim().min(3).max(100).required().messages({
+          "string.base": "Email must be text",
+          "string.empty": "Email cannot be empty",
+          "string.min": "Email must be 3 character at least",
+          "string.email": "Please sign in your email",
+          "string.max": "Email must be 10 character at most",
+          "string.required": "Emailmust be",
+        }),
+        password: joi.string().trim().min(6).max(36).required().messages({
+          "string.base": "Password must be text",
+          "string.empty": "Password cannot be empty",
+          "string.min": "password must be 6 character at least",
+          "string.max": "Password must be 36 character at most",
+          "string.required": "Password must be",
+        }),
+      });
     } catch (error) {
       if (error.details && error?.detail[0].message)
         throw new APIError(error.detail[0].message, 400);
