@@ -13,6 +13,9 @@ const login = async (req, res) => {
 
   if (!userInfo) throw new APIError("Email or Password is wrong !");
 
+  const comparePassword = await bcrypt.compare(password, userInfo.password);
+  console.log(comparePassword);
+
   return res.json(req.body);
 };
 
