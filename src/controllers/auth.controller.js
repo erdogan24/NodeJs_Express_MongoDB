@@ -7,11 +7,11 @@ const Response = require("../utils/response");
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await user.findOne({ email });
+  const userInfo = await user.findOne({ email });
 
-  console.log(user);
+  console.log(userInfo);
 
-  if (!user) throw new APIError("Email or Password is wrong !");
+  if (!userInfo) throw new APIError("Email or Password is wrong !");
 
   return res.json(req.body);
 };
