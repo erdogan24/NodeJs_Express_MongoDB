@@ -52,6 +52,15 @@ class authValidation {
     }
     next();
   };
+
+  static login = async (req, res, next) => {
+    try {
+    } catch (error) {
+      if (error.details && error?.detail[0].message)
+        throw new APIError(error.detail[0].message, 400);
+      else throw new APIError("please follow the validation rules", 400);
+    }
+  };
 }
 
 module.exports = authValidation;
