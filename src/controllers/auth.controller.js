@@ -46,8 +46,9 @@ const register = async (req, res) => {
 };
 
 const me = async (req, res) => {
-  console.log("me function inside");
+  return new Response(req.user);
 };
+
 module.exports = {
   login,
   register,
