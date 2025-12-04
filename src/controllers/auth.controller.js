@@ -45,7 +45,11 @@ const register = async (req, res) => {
     });
 };
 
+const me = async (req, res) => {
+  console.log("me function inside");
+};
 module.exports = {
   login,
   register,
+  me,
 };
