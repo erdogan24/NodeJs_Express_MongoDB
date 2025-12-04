@@ -24,7 +24,10 @@ const tokenCheck = async (req, res, next) => {
   console.log(headerToken);
 
   if (!headerToken) throw new APIError("Please Sign In", 401);
+
+  next();
 };
 module.exports = {
   createToken,
+  tokenCheck,
 };
