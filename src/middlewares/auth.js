@@ -19,8 +19,6 @@ const createToken = async (user, res) => {
   });
 };
 const tokenCheck = async (req, res, next) => {
-  console.log("Token check inside");
-
   const headerToken =
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer ");
@@ -31,8 +29,6 @@ const tokenCheck = async (req, res, next) => {
 
   const token = req.headers.authorization.split(" ")[1];
 
-  console.log(token);
-
   await jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
     if (err) throw new APIError("Invalid Token", 401);
 
@@ -40,12 +36,10 @@ const tokenCheck = async (req, res, next) => {
       .findById(decoded.sub)
       .select("_id name lastname email");
 
-    console.log(userInfo);
-
     if (!userInfo) throw new APIError("Invalid Token", 401);
     req.user = userInfo;
+    next();
   });
-  next();
 };
 module.exports = {
   createToken,
