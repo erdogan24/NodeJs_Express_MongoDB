@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
+const APIError = require("../utils/errors");
 
 const createToken = async (user, res) => {
-  console.log(user);
-
   const payload = {
     sub: user._id,
     name: user.name,
@@ -18,7 +17,14 @@ const createToken = async (user, res) => {
     message: "Successfull",
   });
 };
+const tokenCheck = async (req, res, next) => {
+  const headerToken =
+    req.headers.authorization.startsWith("Bearer ") &&
+    req.headers.authorization;
+  console.log(headerToken);
 
+  if (!headerToken) throw new APIError("Please Sign In", 401);
+};
 module.exports = {
   createToken,
 };
